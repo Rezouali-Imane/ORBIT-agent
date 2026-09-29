@@ -2,13 +2,13 @@ import re
 from typing import Any
 
 
-def compact_specialist_result(text: str, max_chars: int = 1000) -> str:
+def compact_specialist_result(text: str, max_chars: int = 700) -> str:
     if len(text) <= max_chars:
         return text
     return (
-        text[:650]
+        text[:450]
         + "\n\n[Middle of specialist output omitted for context size.]\n\n"
-        + text[-300:]
+        + text[-200:]
     )
 
 

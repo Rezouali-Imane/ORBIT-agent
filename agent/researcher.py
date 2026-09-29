@@ -14,7 +14,7 @@ from tools.web_search import web_search
 def researcher_web_search(query: str) -> str:
     """Run web search and bound its raw result size for the researcher."""
     result = web_search.invoke({"query": query})
-    return compact_specialist_result(protect_external_content(result), max_chars=700)
+    return compact_specialist_result(protect_external_content(result), max_chars=450)
 
 
 researcher_agent = create_agent(
@@ -51,6 +51,6 @@ def researcher(query: str) -> str:
             },
             config={"recursion_limit": 5},
         )
-        return compact_specialist_result(result["messages"][-1].content, max_chars=900)
+        return compact_specialist_result(result["messages"][-1].content, max_chars=600)
     except Exception:
         return researcher_web_search.invoke({"query": query})

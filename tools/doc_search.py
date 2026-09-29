@@ -32,6 +32,6 @@ def search_my_documents(query: str) -> str:
             f"{document.metadata.get('document_name', 'unknown')}\n"
             "Page: "
             f"{document.metadata.get('page_number', 'unknown')}\n"
-            f"Text: {protect_external_content(document.page_content[:700])}"
+            f"Text: {protect_external_content(document.page_content[:400])}"
         )
     return "\n\n---\n\n".join(passages)
