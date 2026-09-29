@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "orbit_agent": "./agent/single_agent.py:agent"
+  },
+  "env": ".env"
+}
