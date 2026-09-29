@@ -102,6 +102,8 @@ ipython_config.py
 
 # Generated RAG manifest and local document library
 data/docs/.manifest.json
+data/docs/*
+!data/docs/.gitkeep
 
 # poetry
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.

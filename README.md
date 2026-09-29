@@ -1,34 +1,40 @@
-# ORBIT
+# ORBIT Agent
 
-ORBIT is organized as one repository with two applications:
+A LangChain agent that manages a librarian (RAG), web researcher, and checker with human approval before saving.
 
-- `orbit-agent/`: Python LangGraph manager, RAG library, approval tools, and upload API.
-- `agent-chat-ui/`: official Agent Chat UI frontend.
+## What it does
 
-## Run the backend
+This agent helps you research topics by searching your own documents and the web. It can also create structured roadmaps for projects. The system requires human approval before saving any information or making changes to your document library.
 
-```powershell
-cd orbit-agent
-uv run langgraph dev
-```
+## Main folders
 
-The LangGraph API runs at `http://127.0.0.1:2024`.
+- **agent/** - Core specialist agents (librarian, researcher, checker)
+- **api/** - Document upload interface
+- **data/docs/** - Your documents that get ingested into the RAG system
+- **tools/** - Tools for searching documents, web research, and managing the document library
+- **tests/** - Unit tests for various components
 
-## Run the upload API
+## Setup
 
-```powershell
-cd orbit-agent
-uv run uvicorn api.upload:app --reload --port 8000
-```
+1. Install dependencies: `uv sync`
+2. Copy `.env.example` to `.env` and fill in your API keys
+3. Put your own documents in `data/docs/`
+4. Run document ingestion: `python tools/ingest.py`
+5. Start the agent: `python main.py`
 
-Open `http://127.0.0.1:8000/upload`.
+## Important notes
 
-## Run the chat UI
+- Documents in `data/docs/` are not included in this repository - you must add your own
+- The agent will ask for approval before saving any information or modifying your document library
 
-```powershell
-cd agent-chat-ui
-npm install --legacy-peer-deps
-npm exec turbo dev -- --filter=web
-```
+## Status
 
-Open `http://localhost:3000`.
+- ✅ Core RAG functionality works (searching user documents)
+- ✅ Web research functionality works (using Tavily API)
+- ✅ Human-in-the-loop approval system works
+- ✅ Document management (add/remove) works
+- ⚠️ Roadmap creation and validation needs more testing
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
