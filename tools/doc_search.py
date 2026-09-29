@@ -2,7 +2,7 @@ from langchain_core.tools import tool
 
 from tools.vector_store import get_vector_store
 
-TOP_K = 4
+TOP_K = 2
 MIN_RELEVANCE_SCORE = 0.40
 NO_RELEVANT_DOCUMENTS = "NO_RELEVANT_DOCUMENTS"
 
@@ -31,6 +31,6 @@ def search_my_documents(query: str) -> str:
             f"{document.metadata.get('document_name', 'unknown')}\n"
             "Page: "
             f"{document.metadata.get('page_number', 'unknown')}\n"
-            f"Text: {document.page_content}"
+            f"Text: {document.page_content[:700]}"
         )
     return "\n\n---\n\n".join(passages)

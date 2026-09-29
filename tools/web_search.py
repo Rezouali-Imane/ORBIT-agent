@@ -6,5 +6,5 @@ web_search = TavilySearch(
         "Search the live web for current or time-sensitive information. "
         "Use this tool when the answer may have changed recently or needs web sources."
     ),
-    max_results=5,
+    max_results=3,
 )

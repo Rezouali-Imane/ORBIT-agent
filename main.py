@@ -1,4 +1,4 @@
-from agent.single_agent import agent
+from agent.manager import manager
 
 
 def main() -> None:
@@ -11,17 +11,10 @@ def main() -> None:
 		if not question:
 			continue
 
-		result = agent.invoke({"messages": [{"role": "user", "content": question}]})
-		messages = result["messages"]
-		tool_names = [
-			tool_call["name"]
-			for message in messages
-			for tool_call in getattr(message, "tool_calls", [])
-		]
-		answer = messages[-1].content
+		result = manager.invoke({"messages": [{"role": "user", "content": question}]})
+		answer = result["messages"][-1].content
 
 		print(f"\nAgent: {answer}")
-		print(f"Tool called: {', '.join(tool_names) if tool_names else 'none'}")
 
 
 if __name__ == "__main__":
