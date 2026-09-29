@@ -1,13 +1,34 @@
-# ORBIT-agent
+# ORBIT
 
-LangChain manager agent that coordinates specialist sub-agents to research, check, and produce an approved roadmap.
+ORBIT is organized as one repository with two applications:
 
-## Document library
+- `orbit-agent/`: Python LangGraph manager, RAG library, approval tools, and upload API.
+- `agent-chat-ui/`: official Agent Chat UI frontend.
 
-The manager can search, add, list, and remove `.pdf`, `.md`, and `.txt` documents. Adding and removing documents pauses for human approval. The lightweight upload page can be started with:
+## Run the backend
 
 ```powershell
+cd orbit-agent
+uv run langgraph dev
+```
+
+The LangGraph API runs at `http://127.0.0.1:2024`.
+
+## Run the upload API
+
+```powershell
+cd orbit-agent
 uv run uvicorn api.upload:app --reload --port 8000
 ```
 
-Open `http://127.0.0.1:8000/upload` to upload a document. Files are limited to 20 MB and duplicate content is skipped.
+Open `http://127.0.0.1:8000/upload`.
+
+## Run the chat UI
+
+```powershell
+cd agent-chat-ui
+npm install --legacy-peer-deps
+npm exec turbo dev -- --filter=web
+```
+
+Open `http://localhost:3000`.
