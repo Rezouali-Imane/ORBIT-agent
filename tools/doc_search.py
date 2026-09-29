@@ -1,5 +1,6 @@
 from langchain_core.tools import tool
 
+from agent.helpers import protect_external_content
 from tools.vector_store import get_vector_store
 
 TOP_K = 2
@@ -31,6 +32,6 @@ def search_my_documents(query: str) -> str:
             f"{document.metadata.get('document_name', 'unknown')}\n"
             "Page: "
             f"{document.metadata.get('page_number', 'unknown')}\n"
-            f"Text: {document.page_content[:700]}"
+            f"Text: {protect_external_content(document.page_content[:700])}"
         )
     return "\n\n---\n\n".join(passages)
