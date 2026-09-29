@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>ORBIT document upload</title></head>
+  <body>
+    <h1>Add a document to ORBIT</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input name="file" type="file" accept=".pdf,.md,.txt" required>
+      <button type="submit">Upload and ingest</button>
+    </form>
+  </body>
+</html>

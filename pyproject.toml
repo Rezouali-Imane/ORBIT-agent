@@ -16,6 +16,9 @@ dependencies = [
     "colorama>=0.4.6",
     "langchain-text-splitters>=1.1.2",
     "pypdf>=6.19.0",
+    "fastapi>=0.142.0",
+    "uvicorn[standard]>=0.54.0",
+    "python-multipart>=0.0.32",
 ]
 
 [dependency-groups]

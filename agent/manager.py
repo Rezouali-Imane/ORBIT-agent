@@ -21,7 +21,15 @@ def build_manager(checkpointer=None):
                     "save_note": {
                         "allowed_decisions": ["approve", "edit", "reject"],
                         "description": "Review the proposed project note before saving it.",
-                    }
+                    },
+                    "add_document": {
+                        "allowed_decisions": ["approve", "edit", "reject"],
+                        "description": "Review the document filename and size before adding it to RAG.",
+                    },
+                    "remove_document": {
+                        "allowed_decisions": ["approve", "reject"],
+                        "description": "Review the document name before removing it from RAG.",
+                    },
                 }
             )
         ],
@@ -32,6 +40,8 @@ def build_manager(checkpointer=None):
         "and both when both kinds of evidence are needed. "
         "Use save_note when the user explicitly asks you to remember or save a "
         "project detail; include a concise title and the exact useful content. "
+        "The librarian can add, list, and remove documents; adding or removing "
+        "documents pauses for human approval before changing the RAG library. "
         "When the user asks for a plan or roadmap, create a structured Roadmap, "
         "call checker with that roadmap before calling create_roadmap, and only "
         "draw it after checker reports no structural issues. "
