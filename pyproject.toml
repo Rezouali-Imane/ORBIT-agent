@@ -1,0 +1,14 @@
+[project]
+name = "orbit-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=1.4.2",
+    "langchain-postgres",
+    "langchain-openai>=1.6.6",
+    "langchain-tavily>=0.2.18",
+    "langgraph>=1.2.12",
+    "python-dotenv>=1.2.3",
+]
