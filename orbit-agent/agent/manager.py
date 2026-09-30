@@ -13,7 +13,7 @@ from config import GROQ_API_KEY, GROQ_MODEL
 
 def build_manager(checkpointer=None):
     options = {
-        "model": ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=500), # type: ignore
+        "model": ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=500),  # type: ignore
         "tools": [librarian, researcher, checker, save_note, create_roadmap],
         "middleware": [
             HumanInTheLoopMiddleware(
