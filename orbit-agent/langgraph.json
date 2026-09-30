@@ -1,7 +1,6 @@
 {
   "dependencies": ["."],
-  "graphs": {
-    "orbit_agent": "./agent/studio.py:studio_manager"
-  },
+ "graphs": { 
+ "orbit_agent": "./agent/manager.py:agent" },
   "env": ".env"
 }

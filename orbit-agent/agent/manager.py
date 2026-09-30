@@ -13,7 +13,7 @@ from config import GROQ_API_KEY, GROQ_MODEL
 
 def build_manager(checkpointer=None):
     options = {
-        "model": ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=500),
+        "model": ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=500), # type: ignore
         "tools": [librarian, researcher, checker, save_note, create_roadmap],
         "middleware": [
             HumanInTheLoopMiddleware(
@@ -59,4 +59,8 @@ def build_manager(checkpointer=None):
     return create_agent(**options)
 
 
+# For the terminal (main.py): keeps conversation memory
 manager = build_manager(InMemorySaver())
+
+# For `langgraph dev`: no checkpointer, the server saves conversations itself
+agent = build_manager()
