@@ -1,6 +1,0 @@
-[
-  {
-    "title": "ORBIT checkpointer",
-    "content": "The manager uses an InMemorySaver checkpointer with thread IDs."
-  }
-]
