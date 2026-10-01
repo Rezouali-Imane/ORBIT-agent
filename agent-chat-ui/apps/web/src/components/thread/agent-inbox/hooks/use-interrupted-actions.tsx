@@ -82,11 +82,35 @@ export default function useInterruptedActions({
 
   const resumeRun = (response: HumanResponse[]): boolean => {
     try {
+      const decisions = response.map((item) => {
+        if (item.type === "accept") {
+          return { type: "approve" as const };
+        }
+        if (
+          item.type === "edit" &&
+          item.args &&
+          typeof item.args === "object" &&
+          "action" in item.args &&
+          "args" in item.args
+        ) {
+          return {
+            type: "edit" as const,
+            edited_action: {
+              name: item.args.action,
+              args: item.args.args,
+            },
+          };
+        }
+        if (item.type === "ignore") {
+          return { type: "reject" as const };
+        }
+        return { type: "respond" as const, message: item.args };
+      });
       thread.submit(
         {},
         {
           command: {
-            resume: response,
+            resume: { decisions },
           },
         },
       );

@@ -9,7 +9,10 @@ import { cn } from "@/lib/utils";
 import { ToolCalls, ToolResult } from "./tool-calls";
 import { MessageContentComplex } from "@langchain/core/messages";
 import { Fragment } from "react/jsx-runtime";
-import { isAgentInboxInterruptSchema } from "@/lib/agent-inbox-interrupt";
+import {
+  isAgentInboxInterruptSchema,
+  normalizeAgentInboxInterrupt,
+} from "@/lib/agent-inbox-interrupt";
 import { ThreadView } from "../agent-inbox";
 import { useQueryState, parseAsBoolean } from "nuqs";
 import { GenericInterruptView } from "./generic-interrupt";
@@ -126,6 +129,7 @@ export function AssistantMessage({
   );
   const meta = message ? thread.getMessagesMetadata(message) : undefined;
   const threadInterrupt = thread.interrupt;
+  const normalizedInterrupt = normalizeAgentInboxInterrupt(threadInterrupt?.value);
 
   const parentCheckpoint = meta?.firstSeenState?.parent_checkpoint;
   const anthropicStreamedToolCalls = Array.isArray(content)
@@ -177,7 +181,7 @@ export function AssistantMessage({
           {message && <CustomComponent message={message} thread={thread} />}
           {isAgentInboxInterruptSchema(threadInterrupt?.value) &&
             (isLastMessage || hasNoAIOrToolMessages) && (
-              <ThreadView interrupt={threadInterrupt.value} />
+              <ThreadView interrupt={normalizedInterrupt!} />
             )}
           {threadInterrupt?.value &&
           !isAgentInboxInterruptSchema(threadInterrupt.value) &&

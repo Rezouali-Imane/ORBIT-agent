@@ -36,7 +36,7 @@ export function ThreadView({ interrupt }: ThreadViewProps) {
   };
 
   return (
-    <div className="orbit-approval-card flex flex-col lg:flex-row w-full h-[80vh] p-8 bg-gray-50/50 rounded-2xl overflow-y-scroll [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-transparent">
+    <div className="orbit-approval-card flex min-h-0 w-full flex-col rounded-2xl bg-gray-50/50 p-4 sm:p-6 lg:flex-row">
       {showSidePanel ? (
         <StateView
           handleShowSidePanel={handleShowSidePanel}

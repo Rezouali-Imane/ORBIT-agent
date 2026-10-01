@@ -289,10 +289,13 @@ export function Thread() {
           <StickyToBottomContent
             className={cn(
               "absolute px-4 inset-0 overflow-y-scroll [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-transparent",
-              !chatStarted && "flex flex-col items-stretch mt-[25vh]",
+              !chatStarted && "flex flex-col items-stretch",
               chatStarted && "grid grid-rows-[1fr_auto]",
             )}
-            contentClassName="pt-8 pb-16 max-w-4xl mx-auto flex flex-col gap-4 w-full"
+            contentClassName={cn(
+              "pt-8 max-w-4xl mx-auto flex flex-col gap-4 w-full",
+              stream.interrupt ? "pb-8" : "pb-64",
+            )}
             content={
               <>
                 {messages
@@ -329,7 +332,10 @@ export function Thread() {
               </>
             }
             footer={
-              <div className="sticky flex flex-col items-center gap-3 bottom-0 border-t border-[#d9e6e2] bg-[#f4f8f6]/95 px-3 pt-3 backdrop-blur">
+              <div className={cn(
+                "sticky flex flex-col items-center gap-3 bottom-0 border-t border-[#d9e6e2] bg-[#f4f8f6]/95 px-3 pt-3 backdrop-blur",
+                stream.interrupt && "hidden",
+              )}>
                 {!chatStarted && (
                   <div className="orbit-empty-state">
                     <div className="orbit-empty-state__mark"><img className="orbit-logo-green" src="/images-removebg-preview.svg" alt="" /></div>
