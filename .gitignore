@@ -224,7 +224,5 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-agent-chat-ui/
-
 orbit-agent/data/notes.json
 orbit-agent/outputs/
