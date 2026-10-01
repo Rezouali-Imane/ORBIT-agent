@@ -2,6 +2,7 @@ from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 from langchain_groq import ChatGroq
 from langgraph.checkpoint.memory import InMemorySaver
+from pydantic import SecretStr
 
 from agent.checker import checker
 from agent.librarian import librarian
@@ -13,7 +14,12 @@ from config import GROQ_API_KEY, GROQ_MODEL
 
 def build_manager(checkpointer=None):
     options = {
-        "model": ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=500),  # type: ignore
+        "model": ChatGroq(
+            model=GROQ_MODEL,
+            api_key=SecretStr(GROQ_API_KEY) if GROQ_API_KEY else None,
+            disable_streaming="tool_calling",
+            max_tokens=900,
+        ),
         "tools": [librarian, researcher, checker, save_note, create_roadmap],
         "middleware": [
             HumanInTheLoopMiddleware(

@@ -2,6 +2,7 @@ from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 from langchain_core.tools import tool
 from langchain_groq import ChatGroq
+from pydantic import SecretStr
 
 from config import GROQ_API_KEY, GROQ_MODEL
 from agent.helpers import compact_specialist_result
@@ -10,7 +11,12 @@ from tools.library_tools import add_document, list_documents, remove_document
 
 
 librarian_agent = create_agent(
-    model=ChatGroq(model=GROQ_MODEL, api_key=GROQ_API_KEY, max_tokens=400),
+    model=ChatGroq(
+        model=GROQ_MODEL,
+        api_key=SecretStr(GROQ_API_KEY) if GROQ_API_KEY else None,
+        disable_streaming="tool_calling",
+        max_tokens=400,
+    ),
     tools=[search_my_documents, add_document, list_documents, remove_document],
     middleware=[
         HumanInTheLoopMiddleware(
