@@ -154,10 +154,14 @@ activemq-data/
 
 # Environments
 .env
+.env.*
+!.env.example
 .envrc
 .venv
 .langgraph_api/
-data/*.db
+*.log
+*.db
+*.db-journal
 env/
 venv/
 ENV/
@@ -224,7 +228,11 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-agent-chat-ui/
-
+# Local application data and generated indexes
+orbit-agent/data/docs/*
+!orbit-agent/data/docs/.gitkeep
 orbit-agent/data/notes.json
 orbit-agent/outputs/
+
+# Local frontend checkout
+agent-chat-ui/
